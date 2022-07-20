@@ -1,41 +1,58 @@
+CREATE DATABASE Soap;
 
-DROP TABLE IF EXISTS `addresses`;
-DROP TABLE IF EXISTS `users`;
+USE Soap;
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `firstname` VARCHAR(100) NOT NULL,
-  `lastname` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `admin` TINYINT(1) NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `postalCode` VARCHAR(10) NOT NULL,
-  `city` VARCHAR(200) NOT NULL,
-  `address1` VARCHAR(255) NOT NULL,
-  `address2` VARCHAR(255) NULL,
-  `idUser` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_addresses_users`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+DROP TABLE IF EXISTS `Soap`.`comments`;
 
-INSERT INTO users (firstname, lastname, email, admin, password) 
-VALUES('Lydie', 'Pluvinage','lydie.pluvinage@wildcodeschool.com',1, "$argon2id$v=19$m=65536,t=5,p=1$KLNhy8gcHqN0nDym48Eb5A$z3LKPSRROAsoMacPYuZ+/4cxOktoscgWBHvrtpBs0x4"),
-('Joseph', 'Mayoral', 'joseph.mayoral@wildcodeschool.com',1,"$argon2id$v=19$m=65536,t=5,p=1$KLNhy8gcHqN0nDym48Eb5A$z3LKPSRROAsoMacPYuZ+/4cxOktoscgWBHvrtpBs0x4"),
-('Camille', 'Sabatier', 'camille.sabatier@wildcodeschool.com',0,"$argon2id$v=19$m=65536,t=5,p=1$KLNhy8gcHqN0nDym48Eb5A$z3LKPSRROAsoMacPYuZ+/4cxOktoscgWBHvrtpBs0x4"),
-('Kaïko', 'Pluvinage', 'nonos@woof.fr',0,"$argon2id$v=19$m=65536,t=5,p=1$KLNhy8gcHqN0nDym48Eb5A$z3LKPSRROAsoMacPYuZ+/4cxOktoscgWBHvrtpBs0x4");
+DROP TABLE IF EXISTS `Soap`.`perfumes`;
 
-INSERT INTO addresses (postalCode, city, address1, address2, idUser)
-VALUES('64100', 'Bayonne', 'Sur la place', null, 1),
-('64100', 'Bayonne', 'Au bout de la rue', 'Au fond à droite', 1),
-('64200', 'Biarritz', '8 min de l''école', 'Mais bon ça reste à Biarritz', 11),
-('33000', 'Bordeaux', 'A côté des girondins', null, 21),
-('64990', 'Villefranque', 'Au bout du chemin', null, 31);
+DROP TABLE IF EXISTS `Soap`. `products`;
+CREATE TABLE IF NOT EXISTS `Soap`.`products`(
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `idPerfume` INT NOT NULL,
+    `productImage` TEXT NOT NULL,
+    `productName` VARCHAR(100) NOT NULL,
+    `productTheme` VARCHAR(100) NOT NULL,
+    `productDesc` TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `Soap`.`perfumes`(
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `perfumeName` VARCHAR(100) NOT NULL,
+    `perfumeColor` VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `Soap`.`comments`(
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `pseudo` VARCHAR(100) NOT NULL,
+     `email` VARCHAR(100) NOT NULL,
+    `CommentText` VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO products (idPerfume, productImage, productName, productTheme, productDesc)
+VALUES 
+('1', 'image1','sapin', 'noel', 'savon en forme de sapin de noel'),
+('1', 'image2','ourson', 'noel', 'savon en forme de petit ourson tout mignon'),
+('1', 'image3','neige', 'noel', 'savon en forme de bonhomme de neige'),
+('1', 'image4','biscuit', 'noel', 'savon en forme de petit biscuit de noel'),
+('1', 'image5','rose', 'fleur', 'savon en forme de petite rose des bois'),
+('1', 'image6','lotus', 'fleur', 'savon en forme de magnifique fleur du lotus'),
+('1', 'image7','tournesol', 'fleur', 'savon en forme de jolie tournesol parfait pour en faire de l huile'),
+('1', 'image8','rectangle', 'forme géométrique', 'savon en forme de pavé triangulaire'),
+('1', 'image9','coeur', 'forme géométrique', 'savon en forme de petit coeur'),
+('1', 'image10','carré', 'forme géométrique', 'savon en forme de carré parfait pour le rangement'),
+('1', 'image11','étoile', 'forme géométrique', 'savon en forme d étoile');
+
+
+INSERT INTO perfumes (perfumeName,perfumeColor)
+VALUES
+('vanille', 'jaune'),
+('noix de coco', 'blanc'),
+('canelle', 'marron'),
+('rose', 'rose');
+
+INSERT INTO comments (pseudo,email,commentText)
+ VALUES
+ ('Abussos64','abussos64@gmail.com','Super idée !! A refaire !');
