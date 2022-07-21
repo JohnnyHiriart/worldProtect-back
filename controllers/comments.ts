@@ -41,10 +41,24 @@ const getOneComment = (async (
   }
 }) as RequestHandler;
 
+// route POST request
+
+const addComment = (async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const comment = req.body as IComment;
+      comment.id = await Comment.addComment(comment);
+      res.status(201).json(comment);
+    } catch(err) {
+      console.log(err)
+      next(err);
+    }
+}) as RequestHandler;
+
 
 
 export default {
   getAllComments,
   getOneComment,
+  addComment,
  
 };

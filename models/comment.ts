@@ -19,9 +19,20 @@ const getCommentById = async (idComment: number): Promise<IComment> => {
   return results[0];
 };
 
+//route post comments
+
+const addComment = async(comment: IComment) : Promise<number> => {
+    const results = await pool
+    .promise()
+    .query<ResultSetHeader>('INSERT INTO comments (pseudo, date, email, commentText) VALUES (?,NOW(),?,?)',
+    [comment.pseudo,  comment.email, comment.commentText]);
+    return results[0].insertId;
+};
+
 
 
 export {
   getAllComments,
   getCommentById,
+  addComment,
 }

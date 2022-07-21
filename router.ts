@@ -32,7 +32,9 @@ server.get('/api/comments', commentsController.getAllComments);
 //route GET by id
 server.get('/api/comments/:idComment', commentsController.getOneComment);
 
+//route POST
 
+server.post('/api/comments', commentsController.addComment);
 
 };
 
