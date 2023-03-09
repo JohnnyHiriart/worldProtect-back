@@ -1,6 +1,6 @@
 import pool from '../db-config';
 import IPerfume from '../interfaces/IPerfume';
-import { ResultSetHeader } from 'mysql2';
+// import { ResultSetHeader } from 'mysql2';
 
 const getAllPerfumes = async (sortBy = ''): Promise<IPerfume[]> => {
   let sql = `SELECT * FROM perfumes`;

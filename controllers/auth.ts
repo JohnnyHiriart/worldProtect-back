@@ -6,7 +6,6 @@
 // import 'dotenv/config';
 // import Joi from 'joi';
 
-
 // // validates login input
 // const validateLogin = (req: Request, res: Response, next: NextFunction) => {
 //   const errors = Joi.object({

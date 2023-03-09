@@ -13,7 +13,7 @@ const corsOptions: cors.CorsOptions = {
   // for cookies
   credentials: true,
   // must-have for frontend to communicate with API
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://world-protect.vercel.app/'],
 };
 
 // middleware cors
